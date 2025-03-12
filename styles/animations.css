@@ -1,0 +1,112 @@
+/* Анимации появления элементов */
+[data-aos] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Задержки для элементов */
+[data-aos-delay="100"] { transition-delay: 0.1s; }
+[data-aos-delay="200"] { transition-delay: 0.2s; }
+[data-aos-delay="300"] { transition-delay: 0.3s; }
+
+/* Анимации для разных направлений */
+[data-aos="fade-right"] {
+    transform: translateX(-30px);
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(30px);
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(30px);
+}
+
+[data-aos="fade-down"] {
+    transform: translateY(-30px);
+}
+
+/* Анимации для карточек */
+.feature-card,
+.service-card,
+.review-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover,
+.service-card:hover,
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация для навигации */
+.nav__link {
+    position: relative;
+}
+
+.nav__link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav__link:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Анимация для галереи */
+.gallery__item {
+    overflow: hidden;
+}
+
+.gallery__img {
+    transition: transform 0.5s ease;
+}
+
+.gallery__item:hover .gallery__img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Анимация для timeline */
+.timeline__item {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease;
+}
+
+.timeline__item.aos-animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Анимация для иконок */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.feature-card__icon {
+    animation: float 3s ease-in-out infinite;
+} 

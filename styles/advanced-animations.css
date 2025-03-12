@@ -1,0 +1,429 @@
+/* Продвинутые анимации для элементов */
+
+/* 3D эффект для карточек */
+.feature-card,
+.service-card,
+.review-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.feature-card:hover,
+.service-card:hover,
+.review-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 
+        20px 20px 30px rgba(0, 0, 0, 0.1),
+        -20px -20px 30px rgba(255, 255, 255, 0.5);
+}
+
+/* Анимация для hero секции */
+.hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    overflow: hidden;
+}
+
+/* Анимированные карточки */
+.feature-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация для иконок */
+.feature-card__icon {
+    animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Анимация для навигации */
+.nav__link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Анимация для карточек услуг */
+.service-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+/* Добавим анимацию для всех элементов с data-aos */
+[data-aos] {
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(100px);
+}
+
+[data-aos="fade-down"] {
+    transform: translateY(-100px);
+}
+
+[data-aos="fade-right"] {
+    transform: translateX(-100px);
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(100px);
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* Анимированный градиент для фона */
+.page-header,
+.hero.page-header {
+    background: linear-gradient(
+        45deg,
+        var(--primary-color),
+        var(--secondary-color),
+        var(--accent-color)
+    );
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before,
+.hero.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, 
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 60%);
+    pointer-events: none;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Эффект печатающегося текста */
+.hero__subtitle {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end);
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Анимация для рейтинга звезд */
+.review-card__rating {
+    display: inline-flex;
+}
+
+.review-card__rating span {
+    opacity: 0;
+    transform: scale(0);
+    animation: popIn 0.3s ease forwards;
+}
+
+.review-card__rating span:nth-child(1) { animation-delay: 0.1s; }
+.review-card__rating span:nth-child(2) { animation-delay: 0.2s; }
+.review-card__rating span:nth-child(3) { animation-delay: 0.3s; }
+.review-card__rating span:nth-child(4) { animation-delay: 0.4s; }
+.review-card__rating span:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Анимация для timeline */
+.timeline__item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    right: -40px;
+    top: 0;
+    transform: scale(0);
+    animation: scaleIn 0.5s ease forwards;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* Эффект параллакса для фоновых изображений */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/pattern.svg');
+    opacity: 0.1;
+    animation: parallax 20s linear infinite;
+}
+
+@keyframes parallax {
+    0% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(-5%) translateY(-5%); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+/* Анимация для формы контактов */
+.form-input,
+.form-textarea {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background: var(--light-bg);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимированная кнопка отправки формы */
+.contact-form button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form button[type="submit"]::after {
+    content: '→';
+    position: absolute;
+    right: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.contact-form button[type="submit"]:hover::after {
+    right: 20px;
+    opacity: 1;
+}
+
+/* Анимация для мобильного меню */
+.nav-toggle {
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle.active {
+    transform: rotate(90deg);
+}
+
+.nav__list {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav__list.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Анимация для социальных иконок */
+.social-links a {
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-5px) rotate(10deg);
+}
+
+/* Анимация для страницы About */
+.about__image img {
+    transition: transform 0.5s ease;
+}
+
+.about__image:hover img {
+    transform: scale(1.05);
+}
+
+/* Анимация для Timeline */
+.timeline__item {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease;
+}
+
+.timeline__item.aos-animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Анимация для контактной формы */
+.contact-form {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.contact-form.aos-animate {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Анимация для карты */
+.contact-info__map {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+.contact-info__map.aos-animate {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Анимация для изображений в галерее */
+.gallery__item {
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery__item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery__item:hover::after {
+    opacity: 1;
+}
+
+.gallery__item img {
+    transition: transform 0.5s ease;
+}
+
+.gallery__item:hover img {
+    transform: scale(1.1);
+}
+
+/* Добавляем задержки для анимаций */
+[data-aos-delay="50"] { transition-delay: 50ms; }
+[data-aos-delay="150"] { transition-delay: 150ms; }
+[data-aos-delay="250"] { transition-delay: 250ms; }
+[data-aos-delay="350"] { transition-delay: 350ms; }
+
+/* Анимация для контактной информации */
+.contact-info__item {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.contact-info__item.aos-animate {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Удаляем все старые анимации для кнопки Telegram */
+.btn--telegram::before,
+.telegram-bot::before,
+.telegram-bot .btn--telegram::before,
+.telegram-bot .btn::before {
+    display: none;
+}
+
+/* Простая анимация для иконки */
+.telegram-bot .btn svg {
+    transition: transform 0.3s ease;
+}
+
+.telegram-bot .btn:hover svg {
+    transform: translateX(3px);
+}
+
+/* Удаляем все анимации для кнопки в секции telegram-bot */
+.telegram-bot .btn::before,
+.telegram-bot .btn::after {
+    display: none;
+} 
