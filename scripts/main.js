@@ -98,4 +98,33 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Выбранный тип записи:', appointmentType);
         // Здесь будет код для перехода к следующему шагу
     });
+
+    // Обработка прозрачности хедера при скролле
+    function handleHeaderTransparency() {
+        const header = document.querySelector('.header');
+        const scrollPosition = window.scrollY;
+
+        if (scrollPosition > 50) {
+            header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            header.style.backdropFilter = 'blur(10px)';
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            document.querySelectorAll('.nav__link').forEach(link => {
+                link.style.color = '#2C5282';
+            });
+            document.querySelector('.logo__text').style.color = '#2C5282';
+        } else {
+            header.style.backgroundColor = 'transparent';
+            header.style.backdropFilter = 'none';
+            header.style.boxShadow = 'none';
+            document.querySelectorAll('.nav__link').forEach(link => {
+                link.style.color = 'white';
+            });
+            document.querySelector('.logo__text').style.color = 'white';
+        }
+    }
+
+    // Добавляем обработчик события прокрутки
+    window.addEventListener('scroll', handleHeaderTransparency);
+    // Вызываем функцию при загрузке страницы
+    window.addEventListener('load', handleHeaderTransparency);
 }); 

@@ -96,15 +96,22 @@
         padding: 0 15px;
     }
 
+    .logo__img {
+        height: 60px !important;
+        margin: 5px 0 !important;
+    }
+
     /* Улучшенная навигация */
     .header {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        background: white;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: none;
     }
 
     .nav-toggle {
@@ -209,6 +216,16 @@
         padding: 0 12px;
     }
 
+    .logo__img {
+        height: 50px !important;
+        margin: 5px 0 !important;
+    }
+
+    .footer__bottom img {
+        height: 70px !important;
+        margin-bottom: 15px !important;
+    }
+
     .section-title {
         font-size: 24px;
         margin-bottom: 20px;
@@ -260,6 +277,11 @@
 @media (max-width: 375px) {
     .container {
         padding: 0 10px;
+    }
+
+    .footer__bottom img {
+        height: 60px !important;
+        margin-bottom: 10px !important;
     }
 
     .hero__title {
